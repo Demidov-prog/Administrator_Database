@@ -1,0 +1,17 @@
+.left {
+    float: left;
+}
+
+.header{
+    overflow: hidden;
+}
+
+.right {
+    float: right;
+}
+
+.header a{
+    float: left;
+    text-align: center;
+    padding: 10px 10px;
+}

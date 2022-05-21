@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Тренеры</title>
+    <link rel="icon" href="../image/database.png" type=”image/png”>
+    <link rel="stylesheet" href="../css/database.css">
+</head>
+<body>
+
+<div class="content">
+    <div id="home"><a href="/">На главную</a></div>
+    <h1>Таблица Trainer</h1>
+    <div class="login-page">
+        <div class="form">
+            <h2>Добавить запись</h2>
+            <form class="login-form" th:method="post" th:action="@{/trainer}" th:object="${newTrainer}">
+                <input type="text" placeholder="name" th:field="*{name}" required/>
+                <input type="number" min="1" max="5" placeholder="sportClass (from 1 to 5)" th:field="*{sportClass}" required/>
+                <input type="number" min="1" max="500000" placeholder="salary" th:field="*{salary}" required/>
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Фильтры</h2>
+            <form class="login-form" th:method="post" th:action="@{/trainer/filter}" th:object="${filter}">
+                <input type="text" placeholder="name" th:field="*{name}" required/>
+                <button type="submit">Отфильтровать</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Поиск по id</h2>
+            <form class="login-form" th:method="get" th:action="@{/trainer/getById}">
+                <input type="number" min="1" placeholder="id" name="idValue" required/>
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+        <div class="form">
+            <form th:action="@{/trainer}" th:method="get" style="display:inline" >
+                <button class="del" type="submit">Первоначальные настройки</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>sport_class</th>
+        <th>salary</th>
+        <th>del</th>
+    </tr>
+    <tr th:each="tr: ${trainers}">
+        <td th:text="${tr.id}"></td>
+        <td th:text="${tr.name}"></td>
+        <td th:text="${tr.sportClass}"></td>
+        <td th:text="${tr.salary}"></td>
+        <td>
+            <form th:action="@{/trainer/{id} (id = ${tr.id})}" th:method="delete" style="display:inline" >
+                <button class="del" type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<div th:id="error" th:text = "${error}"></div>
+</body>
+</html>

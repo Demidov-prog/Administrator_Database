@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link rel="shortcut icon" href="image/database.png" type=”image/png”>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<h1>Выберете таблицу для просмотра и редактирования</h1>
+<div class="content">
+<a class="element" href="/client">
+    <span>Client (Клиент)</span>
+    <br>
+    <img src="image/client.png">
+</a>
+<a class="element" href="/trainer">
+    <span>Trainer (Тренер)</span>
+    <br>
+    <img src="image/trainer.png">
+</a>
+<a class="element" href="/gym">
+    <span>Gym (Спортзал)</span>
+    <br>
+    <img src="image/gym.png">
+</a>
+<a class="element" href="/pass">
+    <span>Pass (Абонемент)</span>
+    <br>
+    <img src="image/pass.png">
+</a>
+<a class="element" href="/clientPassList">
+    <span>Client_pass list (Учет)</span>
+    <br>
+    <img src="image/clientPass.png">
+</a>
+</div>
+
+<form th:action="@{/logout}" method="get">
+    <button type="submit" class="logout">Выйти</button>
+</form>
+
+<form th:action="@{/registration}" method="get">
+    <button type="submit" class="reg">Зарегистрировать модератора</button>
+</form>
+
+</body>
+</html>

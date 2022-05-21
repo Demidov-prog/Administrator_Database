@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Абонементы</title>
+    <link rel="icon" href="../image/database.png" type=”image/png”>
+    <link rel="stylesheet" href="../css/database.css">
+</head>
+<body>
+<div class="content">
+    <div id="home"><a href="/">На главную</a></div>
+    <h1>Таблица Client_pass_list</h1>
+    <div class="login-page">
+        <div class="form">
+            <h2>Добавить запись</h2>
+            <form class="login-form" th:action="@{/clientPassList}" th:method="post">
+                <input type="number" min="1" placeholder="idClient" name="idClient"required/>
+                <input type="number" min="1" placeholder="idPass" name="idPass"required/>
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Удалить запись</h2>
+            <form class="login-form" th:action="@{/clientPassList}" th:method="delete">
+                <input type="number" min="1" placeholder="idClient" name="idClient"required/>
+                <input type="number" min="1" placeholder="idPass" name="idPass"required/>
+                <button type="submit">Удалить</button>
+            </form>
+        </div>
+        <div class="form">
+            <form th:action="@{/clientPassList}" th:method="get" style="display:inline" >
+                <button class="del" type="submit">Первоначальные настройки</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<table id="col">
+    <tr>
+        <th>client_id</th>
+        <th>client_name</th>
+        <th>pass_id</th>
+        <th>pass_price</th>
+    </tr>
+</table>
+<div id="tb" th:each="cl: ${clients}">
+    <div id="fl" th:each="p: ${cl.getPassList()}">
+        <span th:text="${cl.id}"></span>
+        <span th:text="${cl.firstName}"></span>
+        <span th:text="${p.id}"></span>
+        <span th:text="${p.price}"></span>
+    </div>
+</div>
+<div th:id="error" th:text = "${error}"></div>
+</body>
+</html>

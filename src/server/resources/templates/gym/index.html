@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Спортзалы</title>
+    <link rel="icon" href="../image/database.png" type=”image/png”>
+    <link rel="stylesheet" href="../css/database.css">
+</head>
+<body>
+<div class="content">
+    <div id="home"><a href="/">На главную</a></div>
+    <h1>Таблица Gym</h1>
+    <div class="login-page">
+        <div class="form">
+            <h2>Добавить запись</h2>
+            <form class="login-form" th:method="post" th:action="@{/gym}" th:object="${newGym}">
+                <input type="text" placeholder="name" th:field="*{name}" required/>
+                <input type="text" placeholder="address" th:field="*{address}" required/>
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Фильтры</h2>
+            <form class="login-form" th:method="post" th:action="@{/gym/filter}" th:object="${filter}">
+                <input type="text" placeholder="name" th:field="*{name}" required/>
+                <button type="submit">Отфильтровать</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Поиск по id</h2>
+            <form class="login-form" th:method="get" th:action="@{/gym/getById}">
+                <input type="number" min="1" placeholder="id" name="idValue" required/>
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+        <div class="form">
+            <form th:action="@{/gym}" th:method="get" style="display:inline" >
+                <button class="del" type="submit">Первоначальные настройки</button>
+            </form>
+        </div>
+    </div>
+</div>
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>address</th>
+        <th>del</th>
+    </tr>
+    <tr th:each="g: ${gyms}">
+        <td th:text="${g.id}"></td>
+        <td th:text="${g.name}"></td>
+        <td th:text="${g.address}"></td>
+        <td>
+            <form th:action="@{/gym/{id} (id = ${g.id})}" th:method="delete" style="display:inline" >
+                <button class="del" type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<div th:id="error" th:text = "${error}"></div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Клиенты</title>
+    <link rel="icon" href="../image/database.png" type=”image/png”>
+    <link rel="stylesheet" href="../css/database.css">
+</head>
+<body>
+<div class="content">
+    <div id="home"><a href="/">На главную</a></div>
+    <h1>Таблица Client</h1>
+    <div class="login-page">
+        <div class="form">
+            <h2>Добавить запись</h2>
+            <form class="login-form" th:method="post" th:action="@{/client}" th:object="${newClient}">
+                <input type="text" placeholder="firstName" th:field="*{firstName}" required/>
+                <input type="text"placeholder="lastName" th:field="*{lastName}" required/>
+                <input type="text"  placeholder="telephone (79005553535)"
+                       pattern="[0-9]{11}"
+                       th:field="*{telephone}" required/>
+                <input type="text" placeholder="nameTrainer" th:field="*{trainer.name}" required>
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Фильтры</h2>
+            <form class="login-form" th:method="post" th:action="@{/client/filter}" th:object="${filter}">
+                <input type="text" placeholder="firstName" th:field="*{firstName}"/>
+                <input type="text" placeholder="lastName" th:field="*{lastName}"/>
+                <input type="text"  placeholder="telephone (79005553535)"
+                       pattern="[+]{1}[(]{1}[0-9]{3}[)]{1}[0-9]{3}[-]{1}[0-9]{2}[-]{1}[0-9]{2}"
+                       th:field="*{telephone}"/>
+                <input type="text" placeholder="nameTrainer" th:field="*{trainer.name}">
+                <button type="submit">Отфильтровать</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Поиск по id</h2>
+            <form class="login-form" th:method="get" th:action="@{/client/getById}">
+                <input type="number" min="1" placeholder="id" name="idValue" required/>
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+        <div class="form">
+            <form th:action="@{/client}" th:method="get" style="display:inline" >
+                <button class="del" type="submit">Первоначальные настройки</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>telephone</th>
+        <th>trainer_id</th>
+        <th>del</th>
+    </tr>
+    <tr th:each="cl: ${clients}">
+        <td th:text="${cl.id}"></td>
+        <td th:text="${cl.firstName}"></td>
+        <td th:text="${cl.lastName}"></td>
+        <td th:text="${cl.telephone}"></td>
+        <td th:text="${cl.trainer.id}"></td>
+        <td>
+            <form th:action="@{/client/{id} (id = ${cl.id})}" th:method="delete" style="display:inline" >
+                <button class="del" type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<div th:id="error" th:text = "${error}"></div>
+</body>
+</html>

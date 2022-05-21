@@ -1,0 +1,8 @@
+.padding{
+    padding: 10px 10px;
+    margin: 5px 5px;
+}
+
+.flex {
+    display: flex;
+}

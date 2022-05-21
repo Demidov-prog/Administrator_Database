@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Абонементы</title>
+    <link rel="icon" href="../image/database.png" type=”image/png”>
+    <link rel="stylesheet" href="../css/database.css">
+</head>
+<body>
+<div class="content">
+    <div id="home"><a href="/">На главную</a></div>
+    <h1>Таблица Pass</h1>
+    <div class="login-page">
+        <div class="form">
+            <h2>Добавить запись</h2>
+            <form class="login-form" th:method="post" th:action="@{/pass}" th:object="${newPass}">
+                <input type="number" min="1000" max="70000" placeholder="price" th:field="*{price}" required/>
+                <input type="number" min="0" max="12" placeholder="numberOfMonths" th:field="*{numberOfMonths}" required/>
+                <input type="number" min="0" max="50" placeholder="numberOfWorkouts" th:field="*{numberOfWorkouts}" required/>
+                <input type="text" placeholder="gymName" th:field="*{gym.name}" required>
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Фильтры</h2>
+            <form class="login-form" th:method="post" th:action="@{/pass/filter}" th:object="${filter}">
+                <input type="number" min="1000" max="70000" placeholder="price" th:field="*{price}" required/>
+                <button type="submit">Отфильтровать</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Поиск по id</h2>
+            <form class="login-form" th:method="get" th:action="@{/pass/getById}">
+                <input type="number" min="1" placeholder="id" name="idValue" required/>
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+        <div class="form">
+            <form th:action="@{/pass}" th:method="get" style="display:inline" >
+                <button class="del" type="submit">Первоначальные настройки</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>price</th>
+        <th>number_of_months</th>
+        <th>number_of_workouts</th>
+        <th>gym_id</th>
+        <th>del</th>
+    </tr>
+    <tr th:each="p: ${pass}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.price}"></td>
+        <td th:text="${p.numberOfMonths}"></td>
+        <td th:text="${p.numberOfWorkouts}"></td>
+        <td th:text="${p.gym.id}"></td>
+        <td>
+            <form th:action="@{/pass/{id} (id = ${p.id})}" th:method="delete" style="display:inline" >
+                <button class="del" type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<div th:id="error" th:text = "${error}"></div>
+</body>
+</html>

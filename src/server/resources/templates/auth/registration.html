@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+</head>
+<body>
+
+<div id="login">
+    <form th:action="@{/registration}" method="post">
+        <fieldset class="clearfix">
+            <p><span class="fontawesome-user"></span><input type="text" name="username"
+                                                            placeholder="Username" required></p>
+            <p><span class="fontawesome-lock"></span><input type="password"  name="password"
+                                                            placeholder="Password" required></p>
+            <p><input type="submit" value="РЕГИСТРАЦИЯ"></p>
+            <p><a id="home" href="/">На главную</a></p>
+        </fieldset>
+    </form>
+    <div id="yes" th:text="${yes}"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+body {
+    background: #8ECAE6;
+    font-size: 10px;
+}
+
+h1 {
+    font: bold 2rem sans-serif;
+    color: #023047;
+    text-align: center;
+    margin-bottom: 6rem;
+    border-bottom: #023047 solid 1px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.element {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    background: #219EBC;
+    height: 20rem;
+    margin-bottom: 4rem;
+}
+
+.element:hover {
+    background: #FCA311;
+    transition: .5s;
+}
+.element span {
+    display: inline-block;
+    font: bold 1.5rem sans-serif;
+    color: #023047;
+    margin: 1rem 1rem 6rem 1rem;
+}
+.element img {
+    width: 8rem;
+}
+
+.logout, .reg {
+    position: absolute;
+    bottom: 2%;
+    background-color: #FCA311;
+    color: #023047;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+.logout:hover, .reg:hover {
+    background: #FB8500;
+}
+.logout {
+    right: 2%;
+}
+
+.reg {
+    right: 8%;
+}
